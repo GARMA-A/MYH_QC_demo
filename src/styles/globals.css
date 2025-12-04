@@ -214,11 +214,11 @@ html {
 }
 
 .myc-pattern {
-  background-image: 
+  background-image:
     repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(196, 30, 58, 0.03) 35px, rgba(196, 30, 58, 0.03) 70px);
 }
 
 .dark .myc-pattern {
-  background-image: 
+  background-image:
     repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(232, 72, 85, 0.05) 35px, rgba(232, 72, 85, 0.05) 70px);
 }

@@ -26,9 +26,9 @@ function AppContent() {
     <div className="flex h-screen bg-gradient-to-br from-[#faf8f5] via-[#fff8f0] to-[#fef3e2] dark:from-[#121212] dark:via-[#1a1a1a] dark:to-[#1e1e1e] transition-colors myc-pattern relative overflow-hidden">
       {/* Background decorations */}
       <PageBackground />
-      
-      <Sidebar 
-        currentView={currentView} 
+
+      <Sidebar
+        currentView={currentView}
         onViewChange={(view) => {
           setCurrentView(view);
           setSidebarOpen(false);
@@ -36,10 +36,10 @@ function AppContent() {
         isOpen={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
       />
-      
+
       <main className="flex-1 overflow-auto relative z-10">
         {currentView === 'dashboard' && (
-          <Dashboard 
+          <Dashboard
             onMachineSelect={(machineId) => {
               setSelectedMachine(machineId);
               setCurrentView('monitor');
@@ -47,9 +47,9 @@ function AppContent() {
             onMenuClick={() => setSidebarOpen(true)}
           />
         )}
-        
+
         {currentView === 'monitor' && (
-          <MachineMonitor 
+          <MachineMonitor
             machineId={selectedMachine}
             onBack={() => {
               setSelectedMachine(null);
@@ -59,7 +59,7 @@ function AppContent() {
             onMachineSelect={(machineId) => setSelectedMachine(machineId)}
           />
         )}
-        
+
         {currentView === 'qc' && (
           <QCManagement onMenuClick={() => setSidebarOpen(true)} />
         )}
