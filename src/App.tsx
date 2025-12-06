@@ -1,19 +1,20 @@
-import { useState } from 'react';
-import { ThemeProvider } from './contexts/ThemeContext';
-import { AuthProvider, useAuth } from './contexts/AuthContext';
-import { Sidebar } from './components/Sidebar';
-import { Dashboard } from './components/Dashboard';
-import { MachineMonitor } from './components/MachineMonitor';
-import { QCManagement } from './components/QCManagement';
-import { UserManagement } from './components/UserManagement';
-import { Login } from './components/Login';
-import { PageBackground } from './components/PageBackground';
+import { useState } from "react";
+import { ThemeProvider } from "./contexts/ThemeContext";
+import { AuthProvider, useAuth } from "./contexts/AuthContext";
+import { Sidebar } from "./components/Sidebar";
+import { Dashboard } from "./components/Dashboard";
+import { MachineMonitor } from "./components/MachineMonitor";
+import { QCManagement } from "./components/QCManagement";
+import { UserManagement } from "./components/UserManagement";
+import { GeneralErrors } from "./components/GeneralErrors";
+import { Login } from "./components/Login";
+import { PageBackground } from "./components/PageBackground";
 
-export type View = 'dashboard' | 'monitor' | 'qc' | 'users';
+export type View = "dashboard" | "monitor" | "qc" | "users" | "errors";
 
 function AppContent() {
   const { currentUser } = useAuth();
-  const [currentView, setCurrentView] = useState<View>('dashboard');
+  const [currentView, setCurrentView] = useState<View>("dashboard");
   const [selectedMachine, setSelectedMachine] = useState<string | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
@@ -38,34 +39,38 @@ function AppContent() {
       />
 
       <main className="flex-1 overflow-auto relative z-10">
-        {currentView === 'dashboard' && (
+        {currentView === "dashboard" && (
           <Dashboard
             onMachineSelect={(machineId) => {
               setSelectedMachine(machineId);
-              setCurrentView('monitor');
+              setCurrentView("monitor");
             }}
             onMenuClick={() => setSidebarOpen(true)}
           />
         )}
 
-        {currentView === 'monitor' && (
+        {currentView === "monitor" && (
           <MachineMonitor
             machineId={selectedMachine}
             onBack={() => {
               setSelectedMachine(null);
-              setCurrentView('dashboard');
+              setCurrentView("dashboard");
             }}
             onMenuClick={() => setSidebarOpen(true)}
             onMachineSelect={(machineId) => setSelectedMachine(machineId)}
           />
         )}
 
-        {currentView === 'qc' && (
+        {currentView === "qc" && (
           <QCManagement onMenuClick={() => setSidebarOpen(true)} />
         )}
 
-        {currentView === 'users' && (
+        {currentView === "users" && (
           <UserManagement onMenuClick={() => setSidebarOpen(true)} />
+        )}
+
+        {currentView === "errors" && (
+          <GeneralErrors onMenuClick={() => setSidebarOpen(true)} />
         )}
       </main>
     </div>
